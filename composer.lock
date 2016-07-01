@@ -135,12 +135,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/seigler/neat-charts.git",
-                "reference": "dcc0459d938077c8baea0d114722be49bd7bbef9"
+                "reference": "f43540f78545765f411fb058f5e2fcce2ecde373"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/seigler/neat-charts/zipball/dcc0459d938077c8baea0d114722be49bd7bbef9",
-                "reference": "dcc0459d938077c8baea0d114722be49bd7bbef9",
+                "url": "https://api.github.com/repos/seigler/neat-charts/zipball/f43540f78545765f411fb058f5e2fcce2ecde373",
+                "reference": "f43540f78545765f411fb058f5e2fcce2ecde373",
                 "shasum": ""
             },
             "require": {
@@ -171,7 +171,7 @@
                 "charts",
                 "svg"
             ],
-            "time": "2016-07-01 03:41:19"
+            "time": "2016-07-01 21:57:14"
         }
     ],
     "packages-dev": [],
