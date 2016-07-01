@@ -44,7 +44,7 @@ if( !$match || !is_callable( $match['target'] ) || false === call_user_func_arra
 try {
 } catch (Exception $e) {
   header($_SERVER["SERVER_PROTOCOL"]." 500 Server Error", true, 500);
-  echo 'There was some problem generating that for you.';
+  echo '<h1>500 Server Error</h1><p>There was a problem generating this page</p>';
   return true;
 }
 

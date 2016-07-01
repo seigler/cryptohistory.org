@@ -12,7 +12,7 @@
     }
     body {
       font-family: sans-serif;
-      line-height: 1.25rem;
+      line-height: 1.25;
       margin: 0 auto;
       box-sizing: border-box;
       color: white;
@@ -48,11 +48,10 @@
     code {
       display: inline-block;
       padding: 0.1em;
-      margin: -0.1em;
-      border: 1px dashed rgba(0,0,0,0.2);
+      border: 1px dashed black;
       font-size: 1.2em;
-      line-height: 1.25rem;
-      background-color: black;
+      background-color: rgba(0,0,0,0.75);
+      background-clip: padding-box;
     }
     img {
       max-width: 100%;
@@ -64,6 +63,11 @@
       padding: 0 2rem 2rem;
     }
   </style>
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@seiglerj" />
+  <meta name="twitter:title" content="Cryptohistory : Charts" />
+  <meta name="twitter:description" content="Embeddable SVG and PNG cryptocurrency charts" />
+  <meta name="twitter:image" content="http://cryptohistory.org/charts/dark/dash-btc/24h/svg" />
 </head>
 <body>
   <header>
@@ -80,7 +84,7 @@
     <section>
       <h2>Build your own chart:</h2>
       <p>The URL is flexible:<br>
-        <code>http://cryptohistory.org/charts/{theme}/{currency}-btc/{timespan}/{format}</code>.</p>
+        <code>http://cryptohistory.org/charts/{theme}/{currency}-btc/{timespan}/{format}</code></p>
       <p>Theme: <code>dark</code> or <code>light</code>. (More planned)</p>
       <p>Currency: anything active on Poloniex. Prices are all in bitcoin.</p>
       <p>Timespan: <code>7d</code> or <code>24h</code>. (More planned)</p>
