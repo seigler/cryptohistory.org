@@ -6,24 +6,40 @@
   <title>Embeddable Cryptocurrency Charts : Cryptohistory</title>
   <style>
     *, *:after, *:before { box-sizing: inherit; }
+    html {
+      background-image: linear-gradient(105deg, #403, #107);
+      background-attachment: fixed;
+    }
     body {
       font-family: sans-serif;
-      background-color: #ffe;
       line-height: 1.25rem;
-      margin: 0;
+      margin: 0 auto;
       box-sizing: border-box;
+      color: white;
+      max-width: 60em;
+      min-height: 100vh;
+      background-color: rgba(0,0,0,0.25);
+      position: relative;
+    }
+    body:before {
+      content: '';
+      display: table;
+    }
+    a {
+      color: white;
     }
     header {
       padding: 0 2rem;
     }
     main {
-      margin: 0 auto 0 0;
-      padding: 0 2rem 4rem;
-      max-width: 70em;
+      padding: 0 2rem 8rem;
     }
     section {
       display: block;
       margin: 1rem 0;
+    }
+    section + section {
+      margin-top: 2rem;
     }
     figure {
       margin-left: 0;
@@ -36,7 +52,10 @@
       border: 1px dashed rgba(0,0,0,0.2);
       font-size: 1.2em;
       line-height: 1.25rem;
-      background-color: white;
+      background-color: black;
+    }
+    img {
+      max-width: 100%;
     }
     footer {
       position: absolute;
@@ -52,10 +71,10 @@
   </header>
   <main>
     <section>
-      <h2>Poloniex Dash/BTC Price</h2>
+      <h2>SVG and PNG charts with your favorite cryptocurrencies</h2>
       <figure>
-        <img src="/charts/dark/dash-btc/7d/svg" alt="Poloniex Dash/BTC price">
-        <figcaption>7 Day Dash price in BTC <code>http://cryptohistory.org/charts/dark/dash-btc/7d/svg</code></figcaption>
+        <img src="/charts/light/dash-btc/7d/svg" alt="Poloniex Dash/BTC price">
+        <figcaption>7 Day Dash price in BTC <code>http://cryptohistory.org/charts/light/dash-btc/7d/svg</code></figcaption>
       </figure>
     </section>
     <section>
@@ -64,8 +83,14 @@
         <code>http://cryptohistory.org/charts/{theme}/{currency}-btc/{timespan}/{format}</code>.</p>
       <p>Theme: <code>dark</code> or <code>light</code>. (More planned)</p>
       <p>Currency: anything active on Poloniex. Prices are all in bitcoin.</p>
-      <p>Timespan: <code>30d</code>, <code>7d</code>, or <code>24h</code>. (More planned)</p>
+      <p>Timespan: <code>7d</code> or <code>24h</code>. (More planned)</p>
       <p>Format: <code>svg</code> (best) or <code>png</code>.</p>
+    </section>
+    <section>
+      <h2>Examples:</h2>
+      <p>Ethereum 24h, dark SVG: <code><a href="/charts/dark/eth-btc/24h/svg" target="_blank">http://cryptohistory.org/charts/dark/eth-btc/24h/svg</a></code></p>
+      <p>Litecoin 7d, light colored PNG: <code><a href="/charts/dark/ltc-btc/7d/png" target="_blank">http://cryptohistory.org/charts/dark/ltc-btc/7d/png</a></code></p>
+      <p>Factom 7d, dark SVG: <code><a href="/charts/dark/fct-btc/24h/svg" target="_blank">http://cryptohistory.org/charts/dark/fct-btc/24h/svg</a></code></p>
     </section>
   </main>
   <footer>
