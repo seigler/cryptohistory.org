@@ -27,7 +27,7 @@ $router->map( 'GET', '/charts/[dark|light:theme]/[a:curA]-[btc:curB]/[a:duration
     $duration,
     $format,
     800,
-    200,
+    250,
     12
   );
 });

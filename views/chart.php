@@ -82,7 +82,7 @@ function renderChart(
     if(is_null($poloniexJson)) {
       $poloniexJson = getJson($poloniexUrl);
       // Write to cache for next time
-      CacheManager::set('poloniex-json-'.$pair.'-'.$dataDuration, $poloniexJson, $dataDuration);
+      CacheManager::set('poloniex-json-'.$pair.'-'.$dataDuration, $poloniexJson, $dataResolution);
     }
 
     $chartData = [];
@@ -111,10 +111,10 @@ function renderChart(
       $im->destroy();
     }
     CacheManager::set($chartCacheKey, $result);
-    $resultExpires = time() + $dataDuration;
+    $resultExpires = time() + $dataResolution;
   } else {
     $resultExpires = CacheManager::getInfo($chartCacheKey)[ 'expired_time' ];
-    $startTime = $resultExpires - $dataDuration;
+    $startTime = $resultExpires - $dataResolution;
   }
 
   header('Expires: '.gmdate('D, d M Y H:i:s', $resultExpires));
