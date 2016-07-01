@@ -1,0 +1,187 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "1bb799d5b600f9167c5a63c390825771",
+    "content-hash": "8a896903dde64517a29ad409d716c428",
+    "packages": [
+        {
+            "name": "altorouter/altorouter",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dannyvankooten/AltoRouter.git",
+                "reference": "09d9d946c546bae6d22a7654cdb3b825ffda54b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dannyvankooten/AltoRouter/zipball/09d9d946c546bae6d22a7654cdb3b825ffda54b4",
+                "reference": "09d9d946c546bae6d22a7654cdb3b825ffda54b4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "AltoRouter.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Danny van Kooten",
+                    "email": "dannyvankooten@gmail.com",
+                    "homepage": "http://dannyvankooten.com/"
+                },
+                {
+                    "name": "Koen Punt",
+                    "homepage": "https://github.com/koenpunt"
+                },
+                {
+                    "name": "niahoo",
+                    "homepage": "https://github.com/niahoo"
+                }
+            ],
+            "description": "A lightning fast router for PHP",
+            "homepage": "https://github.com/dannyvankooten/AltoRouter",
+            "keywords": [
+                "lightweight",
+                "router",
+                "routing"
+            ],
+            "time": "2014-04-16 09:44:40"
+        },
+        {
+            "name": "phpfastcache/phpfastcache",
+            "version": "4.3.17",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPSocialNetwork/phpfastcache.git",
+                "reference": "348f765dbb426f5da1d009802ab496909e4ad691"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/348f765dbb426f5da1d009802ab496909e4ad691",
+                "reference": "348f765dbb426f5da1d009802ab496909e4ad691",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "suggest": {
+                "ext-apc": "*",
+                "ext-mbstring": "*",
+                "ext-memcache": "*",
+                "ext-memcached": "*",
+                "ext-predis": "*",
+                "ext-redis": "*",
+                "ext-sqlite": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/phpFastCache/phpFastCache.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Khoa Bui",
+                    "email": "khoaofgod@gmail.com",
+                    "homepage": "http://www.phpfastcache.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Georges.L",
+                    "email": "contact@geolim4.com",
+                    "homepage": "https://github.com/Geolim4",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP Cache Class - Supported Redis, Cookie, Predis, APC, MemCached, WinCache, Files, PDO, Reduce mySQL Call by Caching",
+            "homepage": "http://www.phpfastcache.com",
+            "keywords": [
+                "APC Cache",
+                "apc",
+                "cache",
+                "cache class",
+                "caching",
+                "cookie",
+                "files cache",
+                "memcache",
+                "memcached",
+                "mysql cache",
+                "pdo cache",
+                "php cache",
+                "predis",
+                "redis",
+                "wincache"
+            ],
+            "time": "2016-05-17 22:29:47"
+        },
+        {
+            "name": "seigler/neat-charts",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/seigler/neat-charts.git",
+                "reference": "352794cbfcd9d7e4d7d6973188cf35e69d21f723"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/seigler/neat-charts/zipball/352794cbfcd9d7e4d7d6973188cf35e69d21f723",
+                "reference": "352794cbfcd9d7e4d7d6973188cf35e69d21f723",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "NeatCharts\\LineChart": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joshua Seigler",
+                    "email": "joshua@seigler.net",
+                    "homepage": "https://joshua.seigler.net/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Generates clean-looking SVG charts",
+            "homepage": "https://github.com/seigler/neat-charts",
+            "keywords": [
+                "chart",
+                "charts",
+                "svg"
+            ],
+            "time": "2016-06-29 18:58:29"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "seigler/neat-charts": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

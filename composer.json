@@ -1,0 +1,7 @@
+{
+  "require": {
+    "seigler/neat-charts": "@dev",
+    "altorouter/altorouter": "1.1.0",
+    "phpFastCache/phpFastCache": "^4.3"
+  }
+}
