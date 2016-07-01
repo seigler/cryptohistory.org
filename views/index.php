@@ -54,17 +54,16 @@
     <section>
       <h2>Poloniex Dash/BTC Price</h2>
       <figure>
-        <img src="/charts/dark/dash-btc/7d/svg" alt="Poloniex Dash/BTC price">
+        <img src="/charts/dark/dash/7d/svg" alt="Poloniex Dash/BTC price">
         <figcaption>7 Day Dash price in BTC <code>http://cryptohistory.org/charts/dark/dash-btc/7d/svg</code></figcaption>
       </figure>
     </section>
     <section>
       <h2>Build your own chart:</h2>
       <p>The URL is flexible:<br>
-        <code>http://cryptohistory.org/charts/{theme}/{main-currency}-{chart-currency}/{timespan}/{format}</code>.</p>
+        <code>http://cryptohistory.org/charts/{theme}/{currency}/{timespan}/{format}</code>.</p>
       <p>Theme: <code>dark</code> or <code>light</code>. (More planned)</p>
-      <p>Main currency: anything on Poloniex.</p>
-      <p>Chart currency: any of the chart currencies on Poloniex, like BTC or USDT.</p>
+      <p>Currency: anything active on Poloniex.</p>
       <p>Timespan: <code>30d</code>, <code>7d</code>, or <code>24h</code>. (More planned)</p>
       <p>Format: <code>svg</code> (best) or <code>png</code>.</p>
     </section>
