@@ -1,10 +1,8 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+//error_reporting(E_ALL);
 
 require_once 'vendor/autoload.php';
-require_once 'vendor/seigler/neat-charts/src/NeatCharts/NeatChart.php';
-require_once 'vendor/seigler/neat-charts/src/NeatCharts/LineChart.php';
 
 use phpFastCache\CacheManager;
 
@@ -20,19 +18,18 @@ $router->map('GET', '/', function() {
 });
 
 // map cryptocurrency stuff
-$router->map( 'GET', '/charts/[dark|light:theme]/[a:curA]-[a:curB]/[7d|24h:duration]/[svg|png:format]', function($theme, $curA, $curB, $duration, $format) {
+$router->map( 'GET', '/charts/[dark|light:theme]/[a:curA]-[btc:curB]/[a:duration]/[svg|png:format]', function($theme, $curA, $curB, $duration, $format) {
   require __DIR__ . '/views/chart.php';
-  renderChart(
+  return renderChart(
     $theme,
-    strtoupper($curB.'_'.$curA),
-    60 * 60 * 24 * ($duration == '7d' ? 7 : 1),
-    ($duration == '7d' ? 1800 : 300),
+    $curA,
+    $curB,
+    $duration,
     $format,
     800,
     200,
     12
   );
-  return true;
 });
 
 // match current request url

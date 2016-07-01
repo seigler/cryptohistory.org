@@ -22,14 +22,52 @@ function getJson($url) {
 
 function renderChart(
   $theme,
-  $pair,
-  $dataDuration = (7 * 24 * 60 * 60),
-  $dataResolution = 1800,
+  $currencyA,
+  $currencyB,
+  $duration,
   $format = 'svg',
   $width = 800,
   $height = 200,
   $fontSize = 12
 ) {
+
+  $durations = [
+//    '30d'=> [
+//      'duration' => 60 * 60 * 24 * 30,
+//      'resolution' => 7200 // 2h
+//    ],
+    '7d'=> [
+      'duration' => 60 * 60 * 24 * 7,
+      'resolution' => 1800 // 30m
+    ],
+    '24h' => [
+      'duration' => 60 * 60 * 24 * 1,
+      'resolution' => 900 // 15m
+    ]
+  ];
+
+  if (array_key_exists($duration, $durations)) {
+    $dataDuration = $durations[$duration]['duration'];
+    $dataResolution = $durations[$duration]['resolution'];
+  } else {
+    return false;
+  }
+
+  $supportedCurrencies = CacheManager::get('poloniex-supported-currencies');
+  if (is_null($supportedCurrencies)) {
+    $supportedCurrenciesJson = getJson('https://poloniex.com/public?command=returnCurrencies');
+    foreach ($supportedCurrenciesJson as $key => $value) {
+      if ($value->delisted == 0) {
+        $supportedCurrencies[] = strtolower($key);
+      }
+    }
+    CacheManager::set('poloniex-supported-currencies', $supportedCurrencies, 60 * 60 * 24 * 7); // asking once a week doesn't seem like too much
+  }
+  if ($currencyB != 'btc' || !in_array($currencyA, $supportedCurrencies)) {
+    return false;
+  }
+
+  $pair = strtoupper($currencyB . '_' . $currencyA); // poloniex you strange
 
   $chartCacheKey = 'poloniex-'.$theme.'-'.$pair.'-'.$dataDuration.'-'.$format;
 
@@ -88,4 +126,5 @@ function renderChart(
     header('Content-Disposition: inline; filename="Dash-chart-' . gmdate('Y-m-d\THis+0', $startTime) . '--' . gmdate('Y-m-d\THis+0') . '.png"');
   }
   echo $result;
+  return true;
 }
