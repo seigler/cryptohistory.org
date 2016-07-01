@@ -21,17 +21,19 @@ function getJson($url) {
 }
 
 function renderChart(
+  $theme,
   $pair,
   $dataDuration = (7 * 24 * 60 * 60),
   $dataResolution = 1800,
   $format = 'svg',
-  $color = '#000',
   $width = 800,
   $height = 200,
   $fontSize = 12
 ) {
 
-  $result = CacheManager::get('poloniex-'.$pair.'-'.$dataDuration.'-'.$format);
+  $chartCacheKey = 'poloniex-'.$theme.'-'.$pair.'-'.$dataDuration.'-'.$format;
+
+  $result = CacheManager::get($chartCacheKey);
 
   if (is_null($result)) {
     $startTime = time() - $dataDuration;
@@ -54,8 +56,8 @@ function renderChart(
     $poloniexChart = new NeatCharts\LineChart($chartData, [
       'width'=>800,
       'height'=>200,
-      'lineColor'=>"#1C75BC", // Dash blue
-      'labelColor'=>"#000",
+      'lineColor'=>($theme == 'dark' ? '#000' : '#fff'),
+      'labelColor'=>($theme == 'dark' ? '#000' : '#fff'),
       'smoothed'=>false,
       'fontSize'=>12
     ]);
@@ -63,26 +65,26 @@ function renderChart(
 
     if ($format == 'png') {
       $im = new Imagick();
-      $im->setBackgroundColor(new ImagickPixel("transparent"));
+      $im->setBackgroundColor(new ImagickPixel('transparent'));
       $im->readImageBlob($result);
-      $im->setImageFormat("png32");
+      $im->setImageFormat('png32');
       $result = $im->getImageBlob();
       $im->clear();
       $im->destroy();
     }
-    CacheManager::set('poloniex-'.$pair.'-'.$dataDuration.'-'.$format, $result, $dataDuration);
+    CacheManager::set($chartCacheKey, $result);
     $resultExpires = time() + $dataDuration;
   } else {
-    $resultExpires = CacheManager::getInfo('poloniex-'.$pair.'-'.$dataDuration.'-'.$format)[ 'expired_time' ];
+    $resultExpires = CacheManager::getInfo($chartCacheKey)[ 'expired_time' ];
     $startTime = $resultExpires - $dataDuration;
   }
 
-  header('Expires: '.gmdate("D, d M Y H:i:s", $resultExpires));
+  header('Expires: '.gmdate('D, d M Y H:i:s', $resultExpires));
   if ($format == 'svg') {
     header('Content-type: image/svg+xml; charset=utf-8');
     header('Content-Disposition: inline; filename="Dash-chart-' . gmdate('Y-m-d\THis+0', $startTime) . '--' . gmdate('Y-m-d\THis+0') . '.svg"');
   } else if ($format == 'png') {
-    header("Content-Type: image/png");
+    header('Content-Type: image/png');
     header('Content-Disposition: inline; filename="Dash-chart-' . gmdate('Y-m-d\THis+0', $startTime) . '--' . gmdate('Y-m-d\THis+0') . '.png"');
   }
   echo $result;
