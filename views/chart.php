@@ -32,17 +32,21 @@ function renderChart(
 ) {
 
   $durations = [
-//    '30d'=> [
-//      'duration' => 60 * 60 * 24 * 30,
-//      'resolution' => 7200 // 2h
-//    ],
+    '1y'=> [
+      'duration' => 60 * 60 * 24 * 365,
+      'resolution' => 86400 // 1d
+    ],
+    '30d'=> [
+      'duration' => 60 * 60 * 24 * 30,
+      'resolution' => 7200 // 2h
+    ],
     '7d'=> [
       'duration' => 60 * 60 * 24 * 7,
       'resolution' => 1800 // 30m
     ],
     '24h' => [
       'duration' => 60 * 60 * 24 * 1,
-      'resolution' => 900 // 15m
+      'resolution' => 300 // 15m
     ]
   ];
 
@@ -92,12 +96,12 @@ function renderChart(
     }
 
     $poloniexChart = new NeatCharts\LineChart($chartData, [
-      'width'=>800,
-      'height'=>200,
+      'width'=>$width,
+      'height'=>$height,
       'lineColor'=>($theme == 'dark' ? '#000' : '#fff'),
       'labelColor'=>($theme == 'dark' ? '#000' : '#fff'),
       'smoothed'=>false,
-      'fontSize'=>12
+      'fontSize'=>$fontSize
     ]);
     $result = $poloniexChart->render();
 
@@ -110,7 +114,7 @@ function renderChart(
       $im->clear();
       $im->destroy();
     }
-    CacheManager::set($chartCacheKey, $result);
+    CacheManager::set($chartCacheKey, $result, $dataResolution);
     $resultExpires = time() + $dataResolution;
   } else {
     $resultExpires = CacheManager::getInfo($chartCacheKey)[ 'expired_time' ];

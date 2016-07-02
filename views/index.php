@@ -77,8 +77,8 @@
     <section>
       <h2>SVG and PNG charts with your favorite cryptocurrencies</h2>
       <figure>
-        <img src="/charts/light/dash-btc/7d/svg" alt="Poloniex Dash/BTC price">
-        <figcaption>7 Day Dash price in BTC <code>http://cryptohistory.org/charts/light/dash-btc/7d/svg</code></figcaption>
+        <img src="/charts/light/dash-btc/30d/svg" alt="Poloniex Dash/BTC price">
+        <figcaption>30 Day Dash price in BTC <code>http://cryptohistory.org/charts/light/dash-btc/30d/svg</code></figcaption>
       </figure>
     </section>
     <section>
@@ -87,14 +87,14 @@
         <code>http://cryptohistory.org/charts/{theme}/{currency}-btc/{timespan}/{format}</code></p>
       <p>Theme: <code>dark</code> or <code>light</code>. (More planned)</p>
       <p>Currency: anything active on Poloniex. Prices are all in bitcoin.</p>
-      <p>Timespan: <code>7d</code> or <code>24h</code>. (More planned)</p>
+      <p>Timespan: <code>1y</code>, <code>30d</code>, <code>7d</code>, or <code>24h</code>.</p>
       <p>Format: <code>svg</code> (best) or <code>png</code>.</p>
     </section>
     <section>
       <h2>Examples:</h2>
       <p>Ethereum 24h, dark SVG: <code><a href="/charts/dark/eth-btc/24h/svg" target="_blank">http://cryptohistory.org/charts/dark/eth-btc/24h/svg</a></code></p>
-      <p>Litecoin 7d, light colored PNG: <code><a href="/charts/dark/ltc-btc/7d/png" target="_blank">http://cryptohistory.org/charts/dark/ltc-btc/7d/png</a></code></p>
-      <p>Factom 7d, dark SVG: <code><a href="/charts/dark/fct-btc/24h/svg" target="_blank">http://cryptohistory.org/charts/dark/fct-btc/24h/svg</a></code></p>
+      <p>Litecoin 30d, light colored PNG: <code><a href="/charts/dark/ltc-btc/7d/png" target="_blank">http://cryptohistory.org/charts/dark/ltc-btc/30d/png</a></code></p>
+      <p>Doge 1y, dark SVG: <code><a href="/charts/dark/fct-btc/24h/svg" target="_blank">http://cryptohistory.org/charts/dark/doge-btc/30d/svg</a></code></p>
     </section>
   </main>
   <footer>
