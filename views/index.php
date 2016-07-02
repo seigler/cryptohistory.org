@@ -91,7 +91,7 @@
     <section>
       <h2>Examples:</h2>
       <p>Ethereum 24h, dark SVG: <code><a href="/charts/dark/eth-btc/24h/svg" target="_blank">http://cryptohistory.org/charts/dark/eth-btc/24h/svg</a></code></p>
-      <p>Litecoin 30d, light colored PNG: <code><a href="/charts/dark/ltc-btc/30d/png" target="_blank">http://cryptohistory.org/charts/dark/ltc-btc/30d/png</a></code></p>
+      <p>Litecoin 30d, light PNG: <code><a href="/charts/light/ltc-btc/30d/png" target="_blank">http://cryptohistory.org/charts/light/ltc-btc/30d/png</a></code></p>
       <p>Doge 1y, dark SVG: <code><a href="/charts/dark/doge-btc/1y/svg" target="_blank">http://cryptohistory.org/charts/dark/doge-btc/1y/svg</a></code></p>
     </section>
   </main>
