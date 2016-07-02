@@ -114,7 +114,11 @@ function renderChart(
     if(is_null($poloniexJson)) {
       $poloniexJson = getJson($poloniexUrl);
       // Write to cache for next time
-      CacheManager::set('poloniex-json-'.$pair.'-'.$dataDuration, $poloniexJson, $dataResolution);
+      // Expires either in a minute, or 60s after the next data point is supposed to be available
+      $cacheTimeSeconds = max(60, end($poloniexJson)->date + $dataResolution - time() + 60);
+      CacheManager::set('poloniex-json-'.$pair.'-'.$dataDuration, $poloniexJson, $cacheTimeSeconds);
+    } else {
+      $cacheTimeSeconds = max(60, end($poloniexJson)->date + $dataResolution - time() + 60);
     }
 
     $chartData = [];
@@ -135,14 +139,14 @@ function renderChart(
       $im->clear();
       $im->destroy();
     }
-    CacheManager::set($chartCacheKey, $result, $dataResolution);
-    $resultExpires = time() + $dataResolution;
+    CacheManager::set($chartCacheKey, $result, $cacheTimeSeconds);
+    $resultExpires = time() + $cacheTimeSeconds;
   } else {
     $resultExpires = CacheManager::getInfo($chartCacheKey)[ 'expired_time' ];
-    $startTime = $resultExpires - $dataResolution;
+    $startTime = $resultExpires - $dataDuration;
   }
 
-  header('Expires: '.gmdate('D, d M Y H:i:s', $resultExpires));
+  header('Expires: '.gmdate(DateTime::RFC1123, $resultExpires));
   if ($format == 'svg') {
     header('Content-type: image/svg+xml; charset=utf-8');
     header('Content-Disposition: inline; filename="Dash-chart-' . gmdate('Y-m-d\THis+0', $startTime) . '--' . gmdate('Y-m-d\THis+0') . '.svg"');
