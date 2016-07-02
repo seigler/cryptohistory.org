@@ -128,7 +128,8 @@ function renderChart(
     }
 
     $poloniexChart = new NeatCharts\LineChart($chartData, $themes[$theme]);
-    $result = $poloniexChart->render();
+    $result = '<?xml version="1.0" standalone="no"?>' . PHP_EOL;
+    $result .= $poloniexChart->render();
 
     if ($format == 'png') {
       $im = new Imagick();
