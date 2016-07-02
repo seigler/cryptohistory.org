@@ -7,26 +7,21 @@
   <style>
     *, *:after, *:before { box-sizing: inherit; }
     html {
-      background-image: linear-gradient(105deg, #403, #107);
-      background-attachment: fixed;
+      background-color: #ffd;
     }
     body {
       font-family: sans-serif;
       line-height: 1.25;
       margin: 0 auto;
       box-sizing: border-box;
-      color: white;
+      color: black;
       max-width: 60em;
       min-height: 100vh;
-      background-color: rgba(0,0,0,0.25);
       position: relative;
     }
     body:before {
       content: '';
       display: table;
-    }
-    a {
-      color: white;
     }
     header {
       padding: 0 2rem;
@@ -48,9 +43,9 @@
     code {
       display: inline-block;
       padding: 0.1em;
-      border: 1px dashed black;
+      border: 1px dashed gray;
       font-size: 1.2em;
-      background-color: rgba(0,0,0,0.75);
+      background-color: rgba(255,255,255,0.75);
       background-clip: padding-box;
     }
     img {
@@ -75,17 +70,20 @@
   </header>
   <main>
     <section>
-      <h2>SVG and PNG charts with your favorite cryptocurrencies</h2>
+      <h2>Transparent SVG and PNG charts with your favorite cryptocurrencies</h2>
       <figure>
-        <img src="/charts/light/dash-btc/30d/svg" alt="Poloniex Dash/BTC price">
-        <figcaption>30 Day Dash price in BTC <code>http://cryptohistory.org/charts/light/dash-btc/30d/svg</code></figcaption>
+        <img src="/charts/dark/dash-btc/30d/svg" alt="Poloniex Dash/BTC price">
+        <figcaption>30 Day Dash price in BTC <code><a href="/charts/dark/dash-btc/30d/svg">http://cryptohistory.org/charts/dark/dash-btc/30d/svg</a></code></figcaption>
       </figure>
+      <p>Sparklines too! ETH 7 days: <img src="/charts/sparkline/eth-btc/7d/svg" alt="ETH 7d chart" style="vertical-align: bottom;">
+        <code>&lt;img src=&quot;http://cryptohistory.org/charts/sparkline/eth-btc/7d/svg&quot; alt=&quot;ETH 7d chart&quot; style=&quot;vertical-align: bottom;&quot;&gt;</code>
+      </p>
     </section>
     <section>
       <h2>Build your own chart:</h2>
       <p>The URL is flexible:<br>
         <code>http://cryptohistory.org/charts/{theme}/{currency}-btc/{timespan}/{format}</code></p>
-      <p>Theme: <code>dark</code> or <code>light</code>. (More planned)</p>
+      <p>Theme: <code>dark</code>, <code>light</code>, or <code>sparkline</code>.</p>
       <p>Currency: anything active on Poloniex. Prices are all in bitcoin.</p>
       <p>Timespan: <code>1y</code>, <code>30d</code>, <code>7d</code>, or <code>24h</code>.</p>
       <p>Format: <code>svg</code> (best) or <code>png</code>.</p>

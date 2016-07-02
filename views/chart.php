@@ -25,10 +25,7 @@ function renderChart(
   $currencyA,
   $currencyB,
   $duration,
-  $format = 'svg',
-  $width = 800,
-  $height = 200,
-  $fontSize = 12
+  $format = 'svg'
 ) {
 
   $durations = [
@@ -49,6 +46,37 @@ function renderChart(
       'resolution' => 300 // 15m
     ]
   ];
+
+  $themes = [
+    'light'=>[
+      'lineColor'=>'#fff',
+      'labelColor'=>'#fff',
+      'width'=>800,
+      'height'=>250,
+      'smoothed'=>false,
+      'fontSize'=>12
+    ],
+    'dark'=>[
+      'lineColor'=>'#000',
+      'labelColor'=>'#000',
+      'width'=>800,
+      'height'=>250,
+      'smoothed'=>false,
+      'fontSize'=>12
+    ],
+    'sparkline'=>[
+      'lineColor'=>'#000',
+      'width'=>100,
+      'height'=>20,
+      'fontSize'=>2,
+      'yAxisEnabled'=>false,
+      'xAxisEnabled'=>false
+    ]
+  ];
+
+  if (!array_key_exists($theme, $themes)) {
+    return false;
+  }
 
   if (array_key_exists($duration, $durations)) {
     $dataDuration = $durations[$duration]['duration'];
@@ -95,14 +123,7 @@ function renderChart(
       $chartData[$item->date] = $item->weightedAverage;
     }
 
-    $poloniexChart = new NeatCharts\LineChart($chartData, [
-      'width'=>$width,
-      'height'=>$height,
-      'lineColor'=>($theme == 'dark' ? '#000' : '#fff'),
-      'labelColor'=>($theme == 'dark' ? '#000' : '#fff'),
-      'smoothed'=>false,
-      'fontSize'=>$fontSize
-    ]);
+    $poloniexChart = new NeatCharts\LineChart($chartData, $themes[$theme]);
     $result = $poloniexChart->render();
 
     if ($format == 'png') {
