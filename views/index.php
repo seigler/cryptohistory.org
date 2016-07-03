@@ -87,7 +87,7 @@
       <p>Currency: anything active on Poloniex. Prices are all in bitcoin.</p>
       <p>Timespan: <code>1y</code>, <code>30d</code>, <code>7d</code>, or <code>24h</code>.</p>
       <p>Format: <code>svg</code> (best) or <code>png</code>.<br>
-        If you use svg format, you can add <code>?lineColor=</code> to the end of the URL for a custom plot-line color.
+        If you use svg format, you can add <code>lineColor=</code> to the end of the URL for a custom plot-line color, or <code>markerColor=</code> to change the color of the marker at the far right. Example: <code><a href="/charts/dark/maid-btc/7d/svg?lineColor=5593D7&markerColor=29578A">http://cryptohistory.com/charts/dark/maid-btc/7d/svg?lineColor=5593D7&amp;markerColor=29578A</a></code>
       </p>
     </section>
     <section>

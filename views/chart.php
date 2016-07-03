@@ -132,6 +132,8 @@ function renderChart(
 
     if ($format == 'svg') {
       $chartOptions = array_replace($themes[$theme], ['lineColor'=>'@lineColor', 'markerColor'=>'@markerColor']);
+    } else {
+      $chartOptions = $themes[$theme];
     }
 
     $poloniexChart = new NeatCharts\LineChart($chartData, $chartOptions);
