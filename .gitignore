@@ -5,3 +5,5 @@
 /node_modules/
 /vendor/
 /.brackets.json
+/undefined
+/screenshot.png
