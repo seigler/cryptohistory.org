@@ -71,7 +71,7 @@ function renderChart(
       'markerColor'=>'#F00',
       'width'=>100,
       'height'=>20,
-      'fontSize'=>2,
+      'fontSize'=>4,
       'yAxisEnabled'=>false,
       'xAxisEnabled'=>false
     ]
