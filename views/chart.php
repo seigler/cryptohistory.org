@@ -49,8 +49,9 @@ function renderChart(
 
   $themes = [
     'light'=>[
-      'lineColor'=>'#fff',
-      'labelColor'=>'#fff',
+      'lineColor'=>'#FFF',
+      'markerColor'=>'#FFF',
+      'labelColor'=>'#FFF',
       'width'=>800,
       'height'=>250,
       'smoothed'=>false,
@@ -58,6 +59,7 @@ function renderChart(
     ],
     'dark'=>[
       'lineColor'=>'#000',
+      'markerColor'=>'#000',
       'labelColor'=>'#000',
       'width'=>800,
       'height'=>250,
@@ -66,6 +68,7 @@ function renderChart(
     ],
     'sparkline'=>[
       'lineColor'=>'#000',
+      'markerColor'=>'#F00',
       'width'=>100,
       'height'=>20,
       'fontSize'=>2,
@@ -128,7 +131,7 @@ function renderChart(
     }
 
     if ($format == 'svg') {
-      $chartOptions = array_replace($themes[$theme], ['lineColor'=>'@lineColor']);
+      $chartOptions = array_replace($themes[$theme], ['lineColor'=>'@lineColor', 'markerColor'=>'@markerColor']);
     }
 
     $poloniexChart = new NeatCharts\LineChart($chartData, $chartOptions);
@@ -148,6 +151,7 @@ function renderChart(
     $resultExpires = time() + $cacheTimeSeconds;
   } else {
     $resultExpires = CacheManager::getInfo($chartCacheKey)[ 'expired_time' ];
+    // TODO cache an object that has the data and a when-expired timestamp to avoid this cache-info lookup
     $startTime = $resultExpires - $dataDuration;
   }
 
@@ -169,7 +173,18 @@ function renderChart(
     } else {
       $lineColor = $themes[$theme]['lineColor'];
     }
-    echo str_replace('@lineColor', $lineColor, $result);
+
+    if (array_key_exists('markerColor', $_GET)) {
+      $markerColor = htmlspecialchars($_GET['markerColor']);
+      if (1 === preg_match('/^[a-fA-F0-9]{3,6}/', $markerColor)) {
+        //this is an HTML color
+        $markerColor = '#' . $markerColor;
+      }
+    } else {
+      $markerColor = $themes[$theme]['markerColor'];
+    }
+
+    echo str_replace(['@lineColor', '@markerColor'], [$lineColor, $markerColor], $result);
   } else {
     return false;
   }
