@@ -127,7 +127,11 @@ function renderChart(
       $chartData[$item->date] = $item->weightedAverage;
     }
 
-    $poloniexChart = new NeatCharts\LineChart($chartData, $themes[$theme]);
+    if ($format == 'svg') {
+      $chartOptions = array_replace($themes[$theme], ['lineColor'=>'@lineColor']);
+    }
+
+    $poloniexChart = new NeatCharts\LineChart($chartData, $chartOptions);
     $result = '<?xml version="1.0" standalone="no"?>' . PHP_EOL;
     $result .= $poloniexChart->render();
 
@@ -148,13 +152,26 @@ function renderChart(
   }
 
   header('Expires: '.gmdate(DateTime::RFC1123, $resultExpires));
-  if ($format == 'svg') {
-    header('Content-type: image/svg+xml; charset=utf-8');
-    header('Content-Disposition: inline; filename="Dash-chart-' . gmdate('Y-m-d\THis+0', $startTime) . '--' . gmdate('Y-m-d\THis+0') . '.svg"');
-  } else if ($format == 'png') {
+  if ($format == 'png') {
     header('Content-Type: image/png');
     header('Content-Disposition: inline; filename="Dash-chart-' . gmdate('Y-m-d\THis+0', $startTime) . '--' . gmdate('Y-m-d\THis+0') . '.png"');
+    echo $result;
+  } else if ($format == 'svg') {
+    header('Content-type: image/svg+xml; charset=utf-8');
+    header('Content-Disposition: inline; filename="Dash-chart-' . gmdate('Y-m-d\THis+0', $startTime) . '--' . gmdate('Y-m-d\THis+0') . '.svg"');
+
+    if (array_key_exists('lineColor', $_GET)) {
+      $lineColor = htmlspecialchars($_GET['lineColor']);
+      if (1 === preg_match('/^[a-fA-F0-9]{3,6}/', $lineColor)) {
+        //this is an HTML color
+        $lineColor = '#' . $lineColor;
+      }
+    } else {
+      $lineColor = $themes[$theme]['lineColor'];
+    }
+    echo str_replace('@lineColor', $lineColor, $result);
+  } else {
+    return false;
   }
-  echo $result;
   return true;
 }

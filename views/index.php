@@ -72,8 +72,8 @@
     <section>
       <h2>Transparent SVG and PNG charts with your favorite cryptocurrencies</h2>
       <figure>
-        <img src="/charts/dark/dash-btc/30d/svg" alt="Poloniex Dash/BTC price">
-        <figcaption>30 Day Dash price in BTC <code><a href="/charts/dark/dash-btc/30d/svg">http://cryptohistory.org/charts/dark/dash-btc/30d/svg</a></code></figcaption>
+        <img src="/charts/dark/dash-btc/30d/svg?lineColor=1C74BC" alt="Poloniex Dash/BTC price">
+        <figcaption>30 Day Dash price in BTC <code><a href="/charts/dark/dash-btc/30d/svg?lineColor=1C74BC">http://cryptohistory.org/charts/dark/dash-btc/30d/svg?lineColor=1C74BC</a></code></figcaption>
       </figure>
       <p>Sparklines too! ETH 7 days: <img src="/charts/sparkline/eth-btc/7d/svg" alt="ETH 7d chart" style="vertical-align: bottom;">
         <code>&lt;img src=&quot;http://cryptohistory.org/charts/sparkline/eth-btc/7d/svg&quot; alt=&quot;ETH 7d chart&quot; style=&quot;vertical-align: bottom;&quot;&gt;</code>
@@ -86,13 +86,15 @@
       <p>Theme: <code>dark</code>, <code>light</code>, or <code>sparkline</code>.</p>
       <p>Currency: anything active on Poloniex. Prices are all in bitcoin.</p>
       <p>Timespan: <code>1y</code>, <code>30d</code>, <code>7d</code>, or <code>24h</code>.</p>
-      <p>Format: <code>svg</code> (best) or <code>png</code>.</p>
+      <p>Format: <code>svg</code> (best) or <code>png</code>.<br>
+        If you use svg format, you can add <code>?lineColor=</code> to the end of the URL for a custom plot-line color.
+      </p>
     </section>
     <section>
       <h2>Examples:</h2>
       <p>Ethereum 24h, dark SVG: <code><a href="/charts/dark/eth-btc/24h/svg" target="_blank">http://cryptohistory.org/charts/dark/eth-btc/24h/svg</a></code></p>
       <p>Litecoin 30d, light PNG: <code><a href="/charts/light/ltc-btc/30d/png" target="_blank">http://cryptohistory.org/charts/light/ltc-btc/30d/png</a></code></p>
-      <p>Doge 1y, dark SVG: <code><a href="/charts/dark/doge-btc/1y/svg" target="_blank">http://cryptohistory.org/charts/dark/doge-btc/1y/svg</a></code></p>
+      <p>Doge 1y, dark SVG, yellow line: <code><a href="/charts/dark/doge-btc/1y/svg?lineColor=BB9F32" target="_blank">http://cryptohistory.org/charts/dark/doge-btc/1y/svg?lineColor=BB9F32</a></code></p>
     </section>
   </main>
   <footer>
