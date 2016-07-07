@@ -18,7 +18,7 @@ $router->map('GET', '/', function() {
 });
 
 // map cryptocurrency stuff
-$router->map( 'GET', '/charts/[dark|light|sparkline:theme]/[a:curA]-[btc:curB]/[a:duration]/[svg|png:format]', function($theme, $curA, $curB, $duration, $format) {
+$router->map( 'GET', '/charts/[dark|light|sparkline|candlestick:theme]/[a:curA]-[btc:curB]/[a:duration]/[svg|png:format]', function($theme, $curA, $curB, $duration, $format) {
   require __DIR__ . '/views/chart.php';
   return renderChart(
     $theme,

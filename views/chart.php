@@ -20,6 +20,23 @@ function getJson($url) {
   return $result;
 }
 
+function getThemeVariable($variable, $defaults) {
+  if (!array_key_exists($variable, $defaults)) {
+    return null;
+  }
+  if (array_key_exists($variable, $_GET)) {
+    $toReturn = htmlspecialchars($_GET[$variable]);
+    if (1 === preg_match('/^[a-fA-F0-9]{3,6}/', $toReturn)) {
+      //this is an HTML color
+      return '#' . $toReturn;
+    } else {
+      return $toReturn;
+    }
+  } else {
+    return $defaults[$variable];
+  }
+}
+
 function renderChart(
   $theme,
   $currencyA,
@@ -29,21 +46,30 @@ function renderChart(
 ) {
 
   $durations = [
+    /*
+    valid resolutions in seconds:
+    300 5m
+    900 15m
+    1800 30m
+    7200 2h
+    14400 4h
+    86400 24h
+    */
     '1y'=> [
       'duration' => 60 * 60 * 24 * 365,
-      'resolution' => 86400 // 1d
+      'resolution' => 86400 // 24h
     ],
     '30d'=> [
       'duration' => 60 * 60 * 24 * 30,
-      'resolution' => 7200 // 2h
+      'resolution' => 14400 // 4h
     ],
     '7d'=> [
       'duration' => 60 * 60 * 24 * 7,
-      'resolution' => 1800 // 30m
+      'resolution' => 7200 // 2h
     ],
     '24h' => [
       'duration' => 60 * 60 * 24 * 1,
-      'resolution' => 300 // 15m
+      'resolution' => 900 // 15m
     ]
   ];
 
@@ -73,6 +99,17 @@ function renderChart(
       'height'=>20,
       'fontSize'=>4,
       'yAxisEnabled'=>false,
+      'xAxisEnabled'=>false
+    ],
+    'candlestick'=>[
+      'width' => 1000,
+      'height' => 300,
+      'barColor' => '#000',
+      'risingColor' => '#0D0',
+      'fallingColor' => '#D00',
+      'labelColor' => '#000',
+      'fontSize' => 15,
+      'yAxisEnabled'=>true,
       'xAxisEnabled'=>false
     ]
   ];
@@ -124,19 +161,26 @@ function renderChart(
       $cacheTimeSeconds = max(60, end($poloniexJson)->date + $dataResolution - time() + 60);
     }
 
-    $chartData = [];
-
-    foreach ($poloniexJson as $item) {
-      $chartData[$item->date] = $item->weightedAverage;
-    }
-
     if ($format == 'svg') {
-      $chartOptions = array_replace($themes[$theme], ['lineColor'=>'@lineColor', 'markerColor'=>'@markerColor']);
+      $chartOptions = array_replace($themes[$theme], [
+        'lineColor'=>'@lineColor',
+        'markerColor'=>'@markerColor',
+        'risingColor'=>'@risingColor',
+        'fallingColor'=>'@fallingColor'
+      ]);
     } else {
       $chartOptions = $themes[$theme];
     }
 
-    $poloniexChart = new NeatCharts\LineChart($chartData, $chartOptions);
+    if ($theme == 'candlestick') {
+      $poloniexChart = new NeatCharts\CandlestickChart($poloniexJson, $chartOptions);
+    } else {
+      $chartData = [];
+      foreach ($poloniexJson as $item) {
+        $chartData[$item->date] = $item->weightedAverage;
+      }
+      $poloniexChart = new NeatCharts\LineChart($chartData, $chartOptions);
+    }
     $result = '<?xml version="1.0" standalone="no"?>' . PHP_EOL;
     $result .= $poloniexChart->render();
 
@@ -165,28 +209,18 @@ function renderChart(
   } else if ($format == 'svg') {
     header('Content-type: image/svg+xml; charset=utf-8');
     header('Content-Disposition: inline; filename="Dash-chart-' . gmdate('Y-m-d\THis+0', $startTime) . '--' . gmdate('Y-m-d\THis+0') . '.svg"');
-
-    if (array_key_exists('lineColor', $_GET)) {
-      $lineColor = htmlspecialchars($_GET['lineColor']);
-      if (1 === preg_match('/^[a-fA-F0-9]{3,6}/', $lineColor)) {
-        //this is an HTML color
-        $lineColor = '#' . $lineColor;
-      }
-    } else {
-      $lineColor = $themes[$theme]['lineColor'];
-    }
-
-    if (array_key_exists('markerColor', $_GET)) {
-      $markerColor = htmlspecialchars($_GET['markerColor']);
-      if (1 === preg_match('/^[a-fA-F0-9]{3,6}/', $markerColor)) {
-        //this is an HTML color
-        $markerColor = '#' . $markerColor;
-      }
-    } else {
-      $markerColor = $themes[$theme]['markerColor'];
-    }
-
-    echo str_replace(['@lineColor', '@markerColor'], [$lineColor, $markerColor], $result);
+    $result = str_replace([
+      '@lineColor',
+      '@markerColor',
+      '@risingColor',
+      '@fallingColor'
+    ], [
+      getThemeVariable('lineColor', $themes[$theme]),
+      getThemeVariable('markerColor', $themes[$theme]),
+      getThemeVariable('risingColor', $themes[$theme]),
+      getThemeVariable('fallingColor', $themes[$theme])
+    ], $result);
+    echo $result;
   } else {
     return false;
   }

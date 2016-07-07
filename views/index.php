@@ -72,8 +72,8 @@
     <section>
       <h2>Transparent SVG and PNG charts with your favorite cryptocurrencies</h2>
       <figure>
-        <img src="/charts/dark/dash-btc/30d/svg?lineColor=1C74BC" alt="Poloniex Dash/BTC price">
-        <figcaption>30 Day Dash price in BTC <code><a href="/charts/dark/dash-btc/30d/svg?lineColor=1C74BC">http://cryptohistory.org/charts/dark/dash-btc/30d/svg?lineColor=1C74BC</a></code></figcaption>
+        <img src="/charts/candlestick/dash-btc/7d/svg" alt="Poloniex Dash/BTC price">
+        <figcaption>30 day Dash price candlesticks in BTC <code><a href="/charts/candlestick/dash-btc/30d/svg">http://cryptohistory.org/charts/candlestick/dash-btc/30d/svg</a></code></figcaption>
       </figure>
       <p>Sparklines too! ETH 7 days: <img src="/charts/sparkline/eth-btc/7d/svg" alt="ETH 7d chart" style="vertical-align: bottom;">
         <code>&lt;img src=&quot;http://cryptohistory.org/charts/sparkline/eth-btc/7d/svg&quot; alt=&quot;ETH 7d chart&quot; style=&quot;vertical-align: bottom;&quot;&gt;</code>
