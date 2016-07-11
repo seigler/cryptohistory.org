@@ -25,10 +25,7 @@ $router->map( 'GET', '/charts/[dark|light|sparkline|candlestick:theme]/[a:curA]-
     $curA,
     $curB,
     $duration,
-    $format,
-    800,
-    250,
-    12
+    $format
   );
 });
 
