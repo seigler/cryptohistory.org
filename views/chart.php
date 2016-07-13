@@ -102,8 +102,8 @@ function renderChart(
       'xAxisEnabled'=>false
     ],
     'candlestick'=>[
-      'width' => 1000,
-      'height' => 300,
+      'width' => 800,
+      'height' => 250,
       'barColor' => '#000',
       'risingColor' => '#0D0',
       'fallingColor' => '#D00',
