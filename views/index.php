@@ -62,7 +62,7 @@
   <meta name="twitter:site" content="@seiglerj" />
   <meta name="twitter:title" content="Cryptohistory : Charts" />
   <meta name="twitter:description" content="Embeddable SVG and PNG cryptocurrency charts" />
-  <meta name="twitter:image" content="http://cryptohistory.org/charts/dark/dash-btc/24h/svg" />
+  <meta name="twitter:image" content="https://cryptohistory.org/charts/dark/dash-btc/24h/svg" />
 </head>
 <body>
   <header>
@@ -73,28 +73,28 @@
       <h2>Transparent SVG and PNG charts with your favorite cryptocurrencies</h2>
       <figure>
         <img src="/charts/candlestick/dash-btc/7d/svg" alt="Poloniex Dash/BTC price">
-        <figcaption>7 day Dash price candlesticks in BTC <code><a href="/charts/candlestick/dash-btc/7d/svg">http://cryptohistory.org/charts/candlestick/dash-btc/7d/svg</a></code></figcaption>
+        <figcaption>7 day Dash price candlesticks in BTC <code><a href="/charts/candlestick/dash-btc/7d/svg">https://cryptohistory.org/charts/candlestick/dash-btc/7d/svg</a></code></figcaption>
       </figure>
       <p>Sparklines too! ETH 7 days: <img src="/charts/sparkline/eth-btc/7d/svg" alt="ETH 7d chart" style="vertical-align: bottom;">
-        <code>&lt;img src=&quot;http://cryptohistory.org/charts/sparkline/eth-btc/7d/svg&quot; alt=&quot;ETH 7d chart&quot; style=&quot;vertical-align: bottom;&quot;&gt;</code>
+        <code>&lt;img src=&quot;https://cryptohistory.org/charts/sparkline/eth-btc/7d/svg&quot; alt=&quot;ETH 7d chart&quot; style=&quot;vertical-align: bottom;&quot;&gt;</code>
       </p>
     </section>
     <section>
       <h2>Build your own chart:</h2>
       <p>The URL is flexible:<br>
-        <code>http://cryptohistory.org/charts/{theme}/{currency}-btc/{timespan}/{format}</code></p>
+        <code>https://cryptohistory.org/charts/{theme}/{currency}-btc/{timespan}/{format}</code></p>
       <p>Theme: <code>dark</code>, <code>light</code>, or <code>sparkline</code>.</p>
       <p>Currency: anything active on Poloniex. Prices are all in bitcoin.</p>
       <p>Timespan: <code>1y</code>, <code>30d</code>, <code>7d</code>, or <code>24h</code>.</p>
       <p>Format: <code>svg</code> (best) or <code>png</code>.</p>
-      <p>If you use svg format, you can control some of the colors with GET parameters: <code>lineColor</code>, <code>markerColor</code>, <code>risingColor</code>, <code>fallingColor</code>. Some examples: <code><a href="/charts/dark/maid-btc/7d/svg?lineColor=5593D7&markerColor=29578A">http://cryptohistory.com/charts/dark/maid-btc/7d/svg?lineColor=5593D7&amp;markerColor=29578A</a></code> <code><a href="/charts/candlestick/fct-btc/7d/svg?risingColor=FE8534&fallingColor=00BAE9">http://cryptohistory.org/charts/candlestick/fct-btc/7d/svg?risingColor=FE8534&amp;fallingColor=00BAE9</a></code>
+      <p>If you use svg format, you can control some of the colors with GET parameters: <code>lineColor</code>, <code>markerColor</code>, <code>risingColor</code>, <code>fallingColor</code>. Some examples: <code><a href="/charts/dark/maid-btc/7d/svg?lineColor=5593D7&markerColor=29578A">https://cryptohistory.com/charts/dark/maid-btc/7d/svg?lineColor=5593D7&amp;markerColor=29578A</a></code> <code><a href="/charts/candlestick/fct-btc/7d/svg?risingColor=FE8534&fallingColor=00BAE9">https://cryptohistory.org/charts/candlestick/fct-btc/7d/svg?risingColor=FE8534&amp;fallingColor=00BAE9</a></code>
       </p>
     </section>
     <section>
       <h2>Examples:</h2>
-      <p>Ethereum 24h, dark SVG: <code><a href="/charts/dark/eth-btc/24h/svg" target="_blank">http://cryptohistory.org/charts/dark/eth-btc/24h/svg</a></code></p>
-      <p>Litecoin 30d, light PNG: <code><a href="/charts/light/ltc-btc/30d/png" target="_blank">http://cryptohistory.org/charts/light/ltc-btc/30d/png</a></code></p>
-      <p>Doge 1y, dark SVG, yellow line: <code><a href="/charts/dark/doge-btc/1y/svg?lineColor=BB9F32" target="_blank">http://cryptohistory.org/charts/dark/doge-btc/1y/svg?lineColor=BB9F32</a></code></p>
+      <p>Ethereum 24h, dark SVG: <code><a href="/charts/dark/eth-btc/24h/svg" target="_blank">https://cryptohistory.org/charts/dark/eth-btc/24h/svg</a></code></p>
+      <p>Litecoin 30d, light PNG: <code><a href="/charts/light/ltc-btc/30d/png" target="_blank">https://cryptohistory.org/charts/light/ltc-btc/30d/png</a></code></p>
+      <p>Doge 1y, dark SVG, yellow line: <code><a href="/charts/dark/doge-btc/1y/svg?lineColor=BB9F32" target="_blank">https://cryptohistory.org/charts/dark/doge-btc/1y/svg?lineColor=BB9F32</a></code></p>
     </section>
   </main>
   <footer>
