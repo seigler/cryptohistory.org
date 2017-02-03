@@ -135,7 +135,7 @@ function renderChart(
     }
     CacheManager::set('poloniex-supported-currencies', $supportedCurrencies, 60 * 60 * 24 * 7); // asking once a week doesn't seem like too much
   }
-  if ($currencyB != 'btc' || !in_array($currencyA, $supportedCurrencies)) {
+  if (!in_array($currencyB, ['btc', 'usdt']) || !in_array($currencyA, $supportedCurrencies)) {
     return false;
   }
 
