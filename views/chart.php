@@ -102,15 +102,27 @@ function renderChart(
       'xAxisEnabled'=>false
     ],
     'candlestick'=>[
-      'width' => 800,
-      'height' => 250,
-      'barColor' => '#000',
-      'risingColor' => '#0D0',
-      'fallingColor' => '#D00',
-      'labelColor' => '#000',
-      'fontSize' => 15,
+      'width'=>800,
+      'height'=>250,
+      'barColor'=>'#000',
+      'risingColor'=>'#0D0',
+      'fallingColor'=>'#D00',
+      'labelColor'=>'#000',
+      'fontSize'=>15,
       'yAxisEnabled'=>true,
       'xAxisEnabled'=>false
+    ],
+    'filled'=>[
+      'width'=>800,
+      'height'=>250,
+      'lineColor'=>'#000',
+      'labelColor'=>'#000',
+      'smoothed'=>true,
+      'fontSize'=>15,
+      'yAxisEnabled'=>true,
+      'xAxisEnabled'=>false,
+      'yAxisZero'=>true,
+      'filled'=>true
     ]
   ];
 
