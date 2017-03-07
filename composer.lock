@@ -60,16 +60,16 @@
         },
         {
             "name": "phpfastcache/phpfastcache",
-            "version": "4.3.17",
+            "version": "4.3.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPSocialNetwork/phpfastcache.git",
-                "reference": "348f765dbb426f5da1d009802ab496909e4ad691"
+                "reference": "82a84adff6e8fc9b564c616d0fdc9238ae2e86c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/348f765dbb426f5da1d009802ab496909e4ad691",
-                "reference": "348f765dbb426f5da1d009802ab496909e4ad691",
+                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/82a84adff6e8fc9b564c616d0fdc9238ae2e86c3",
+                "reference": "82a84adff6e8fc9b564c616d0fdc9238ae2e86c3",
                 "shasum": ""
             },
             "require": {
@@ -127,7 +127,7 @@
                 "redis",
                 "wincache"
             ],
-            "time": "2016-05-17 22:29:47"
+            "time": "2017-01-24 00:38:01"
         },
         {
             "name": "seigler/neat-charts",
@@ -135,12 +135,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/seigler/neat-charts.git",
-                "reference": "eb9a5e927992e32569d767d6bac8e7291d99661b"
+                "reference": "d17faefe885a3da78b2a9e6232d5ad43dcd080e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/seigler/neat-charts/zipball/eb9a5e927992e32569d767d6bac8e7291d99661b",
-                "reference": "eb9a5e927992e32569d767d6bac8e7291d99661b",
+                "url": "https://api.github.com/repos/seigler/neat-charts/zipball/d17faefe885a3da78b2a9e6232d5ad43dcd080e3",
+                "reference": "d17faefe885a3da78b2a9e6232d5ad43dcd080e3",
                 "shasum": ""
             },
             "require": {
@@ -171,7 +171,7 @@
                 "charts",
                 "svg"
             ],
-            "time": "2016-07-21 03:23:54"
+            "time": "2017-03-07 07:57:21"
         }
     ],
     "packages-dev": [],

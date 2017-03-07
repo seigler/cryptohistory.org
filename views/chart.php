@@ -81,7 +81,10 @@ function renderChart(
       'width'=>800,
       'height'=>250,
       'smoothed'=>false,
-      'fontSize'=>12
+      'yAxisEnabled'=>true,
+      'xAxisEnabled'=>true,
+      'fontSize'=>12,
+      'shadow'=>'#000'
     ],
     'dark'=>[
       'lineColor'=>'#000',
@@ -90,7 +93,10 @@ function renderChart(
       'width'=>800,
       'height'=>250,
       'smoothed'=>false,
-      'fontSize'=>12
+      'yAxisEnabled'=>true,
+      'xAxisEnabled'=>true,
+      'fontSize'=>12,
+      'shadow'=>'#FFF'
     ],
     'sparkline'=>[
       'lineColor'=>'#000',
@@ -110,7 +116,8 @@ function renderChart(
       'labelColor'=>'#000',
       'fontSize'=>15,
       'yAxisEnabled'=>true,
-      'xAxisEnabled'=>false
+      'xAxisEnabled'=>true,
+      'shadow'=>'#FFF'
     ],
     'filled'=>[
       'width'=>800,
