@@ -62,7 +62,7 @@
   <meta name="twitter:site" content="@seiglerj" />
   <meta name="twitter:title" content="Cryptohistory : Charts" />
   <meta name="twitter:description" content="Embeddable SVG and PNG cryptocurrency charts" />
-  <meta name="twitter:image" content="https://cryptohistory.org/charts/dark/dash-btc/24h/svg" />
+  <meta name="twitter:image" content="https://cryptohistory.org/screenshot.png" />
 </head>
 <body>
   <header>
@@ -73,7 +73,7 @@
       <h2>Transparent SVG and PNG charts with your favorite cryptocurrencies</h2>
       <figure>
         <img src="/charts/candlestick/dash-usd/7d/svg" alt="Dash/USD price">
-        <figcaption>7 day Dash price candlesticks in USD <code><a href="/charts/candlestick/dash-usdt/7d/svg">https://cryptohistory.org/charts/candlestick/dash-usd/7d/svg</a></code></figcaption>
+        <figcaption>7 day Dash price candlesticks in USD <code><a href="/charts/candlestick/dash-usd/7d/svg">https://cryptohistory.org/charts/candlestick/dash-usd/7d/svg</a></code></figcaption>
       </figure>
       <p>Sparklines too! ETH/BTC 7 days: <img src="/charts/sparkline/eth-btc/7d/svg" alt="ETH 7d chart" style="vertical-align: bottom;">
         <code>&lt;img src=&quot;https://cryptohistory.org/charts/sparkline/eth-btc/7d/svg&quot; alt=&quot;ETH/BTC 7d chart&quot; style=&quot;vertical-align: bottom;&quot;&gt;</code>
