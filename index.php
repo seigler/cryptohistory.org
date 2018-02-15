@@ -18,7 +18,7 @@ $router->map('GET', '/', function() {
 });
 
 // map cryptocurrency stuff
-$router->map( 'GET', '/charts/[dark|light|sparkline|candlestick|filled:theme]/[a:curA]-[btc|usdt:curB]/[a:duration]/[svg|png:format]', function($theme, $curA, $curB, $duration, $format) {
+$router->map( 'GET', '/charts/[dark|light|sparkline|candlestick|filled:theme]/[a:curA]-[a:curB]/[a:duration]/[svg|png:format]', function($theme, $curA, $curB, $duration, $format) {
   require __DIR__ . '/views/chart.php';
   return renderChart(
     $theme,
@@ -37,12 +37,6 @@ if( !$match || !is_callable( $match['target'] ) || false === call_user_func_arra
   // no route was matched
   header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
   echo '<h1>404 Not Found</h1><p>Page not found</p>';
-}
-try {
-} catch (Exception $e) {
-  header($_SERVER["SERVER_PROTOCOL"]." 500 Server Error", true, 500);
-  echo '<h1>500 Server Error</h1><p>There was a problem generating this page</p>';
-  return true;
 }
 
 ?>

@@ -45,33 +45,8 @@ function renderChart(
   $format = 'svg'
 ) {
 
-  $durations = [
-    /*
-    valid resolutions in seconds:
-    300 5m
-    900 15m
-    1800 30m
-    7200 2h
-    14400 4h
-    86400 24h
-    */
-    '1y'=> [
-      'duration' => 60 * 60 * 24 * 365,
-      'resolution' => 86400 // 24h
-    ],
-    '30d'=> [
-      'duration' => 60 * 60 * 24 * 30,
-      'resolution' => 14400 // 4h
-    ],
-    '7d'=> [
-      'duration' => 60 * 60 * 24 * 7,
-      'resolution' => 7200 // 2h
-    ],
-    '24h' => [
-      'duration' => 60 * 60 * 24 * 1,
-      'resolution' => 900 // 15m
-    ]
-  ];
+  $currencyA = strtoupper($currencyA);
+  $currencyB = strtoupper($currencyB);
 
   $themes = [
     'light'=>[
@@ -137,47 +112,89 @@ function renderChart(
     return false;
   }
 
+  $durations = [
+    /* day, hour, minute */
+    '1y'=> [
+      'resolution' => 'day',
+      'limit' => 365,
+      'aggregate' => 7,
+      'cacheTimeSeconds' => 7 * 24 * 60 * 60
+    ],
+    '30d'=> [
+      'resolution' => 'day',
+      'limit' => 30,
+      'aggregate' => 1,
+      'cacheTimeSeconds' => 24 * 60 * 60
+    ],
+    '7d'=> [
+      'resolution' => 'hour',
+      'limit' => 7 * 24,
+      'aggregate' => 4,
+      'cacheTimeSeconds' => 4 * 24 * 60 * 60
+    ],
+    '24h' => [
+      'resolution' => 'minute',
+      'limit' => 24 * 60,
+      'aggregate' => 15,
+      'cacheTimeSeconds' => 15 * 60
+    ]
+  ];
+
   if (array_key_exists($duration, $durations)) {
-    $dataDuration = $durations[$duration]['duration'];
-    $dataResolution = $durations[$duration]['resolution'];
+    $resolution = $durations[$duration]['resolution'];
+    $limit = $durations[$duration]['limit'];
+    $aggregate = $durations[$duration]['aggregate'];
+    $cacheTimeSeconds = $durations[$duration]['cacheTimeSeconds'];
   } else {
     return false;
   }
 
-  $supportedCurrencies = CacheManager::get('poloniex-supported-currencies');
-  if (is_null($supportedCurrencies)) {
-    $supportedCurrenciesJson = getJson('https://poloniex.com/public?command=returnCurrencies');
-    foreach ($supportedCurrenciesJson as $key => $value) {
-      if ($value->delisted == 0) {
-        $supportedCurrencies[] = strtolower($key);
-      }
-    }
-    CacheManager::set('poloniex-supported-currencies', $supportedCurrencies, 60 * 60 * 24 * 7); // asking once a week doesn't seem like too much
-  }
-  if (!in_array($currencyB, ['btc', 'usdt']) || !in_array($currencyA, $supportedCurrencies)) {
-    return false;
-  }
+  // $supportedCurrencies = CacheManager::get('cryptocompare-supported-currencies');
+  // if (is_null($supportedCurrencies)) {
+  //   $supportedCurrenciesJson = getJson('https://min-api.cryptocompare.com/data/all/coinlist');
+  //   $supportedCurrencies = [
+  //     'USD',
+  //     'EUR',
 
-  $pair = strtoupper($currencyB . '_' . $currencyA); // poloniex you strange
+  //   ];
+  //   foreach ($supportedCurrenciesJson->Data as $key => $value) {
+  //     if ($value->IsTrading == 1) {
+  //       $supportedCurrencies[] = $key;
+  //     }
+  //   }
+  //   CacheManager::set('cryptocompare-supported-currencies', $supportedCurrencies, 60 * 60 * 24); // asking once a day seems reasonable
+  // }
 
-  $chartCacheKey = 'poloniex-'.$theme.'-'.$pair.'-'.$dataDuration.'-'.$format;
+  // $currencyA = strtoupper($currencyA);
+  // $currencyB = strtoupper($currencyB);
 
-  $result = CacheManager::get($chartCacheKey);
+  // if (!in_array($currencyA, $supportedCurrencies) || !in_array($currencyB, $supportedCurrencies)) {
+  //   return false;
+  // }
+
+  $chartCacheKey = 'cryptocompare-'.$theme.'-'.$currencyA.'-'.$currencyB.'-'.$duration.'-'.$format;
+
+  $result = null;//CacheManager::get($chartCacheKey);
 
   if (is_null($result)) {
-    $startTime = time() - $dataDuration;
-    $poloniexUrl = 'https://poloniex.com/public?command=returnChartData&currencyPair=' . $pair . '&start=' . $startTime . '&end=9999999999&period=' . $dataResolution;
+    $dataCacheKey = 'cryptocompare-'.$currencyA.'-'.$currencyB.'-'.$duration;
+    $cryptocompareJson = CacheManager::get($dataCacheKey);
 
-    $poloniexJson = CacheManager::get('poloniex-json-'.$pair.'-'.$dataDuration);
+    if(is_null($cryptocompareJson)) {
+      $cryptocompareJson = getJson('https://min-api.cryptocompare.com/data/histo'.
+        "$resolution?fsym=$currencyA&tsym=$currencyB&limit=$limit&aggregate=$aggregate");
 
-    if(is_null($poloniexJson)) {
-      $poloniexJson = getJson($poloniexUrl);
-      // Write to cache for next time
-      // Expires either in a minute, or 60s after the next data point is supposed to be available
-      $cacheTimeSeconds = max(60, end($poloniexJson)->date + $dataResolution - time() + 60);
-      CacheManager::set('poloniex-json-'.$pair.'-'.$dataDuration, $poloniexJson, $cacheTimeSeconds);
+      if ($cryptocompareJson->Response == 'Error') {
+        CacheManager::set($dataCacheKey, $cryptocompareJson, 60);
+        return false;
+      } else {
+        // Write to cache for next time
+        // Expires either in a minute, or 60s after the next data point is supposed to be available
+        $cacheTimeSeconds = max(60, $cryptocompareJson->TimeTo + $cacheTimeSeconds - time() + 60);
+        CacheManager::set($dataCacheKey, $cryptocompareJson, $cacheTimeSeconds);
+      }
     } else {
-      $cacheTimeSeconds = max(60, end($poloniexJson)->date + $dataResolution - time() + 60);
+      $cacheTimeSeconds = max(60, $cryptocompareJson->TimeTo + $cacheTimeSeconds - time());
     }
 
     if ($format == 'svg') {
@@ -192,16 +209,20 @@ function renderChart(
     }
 
     if ($theme == 'candlestick') {
-      $poloniexChart = new NeatCharts\CandlestickChart($poloniexJson, $chartOptions);
+      $chartData = $cryptocompareJson->Data;
+      foreach ($chartData as $item) {
+        $item->date = $item->time;
+      }
+      $neatChart = new NeatCharts\CandlestickChart($chartData, $chartOptions);
     } else {
       $chartData = [];
-      foreach ($poloniexJson as $item) {
-        $chartData[$item->date] = $item->weightedAverage;
+      foreach ($cryptocompareJson->Data as $item) {
+        $chartData[$item->time] = ($item->high + $item->low + $item->close) / 3;
       }
-      $poloniexChart = new NeatCharts\LineChart($chartData, $chartOptions);
+      $neatChart = new NeatCharts\LineChart($chartData, $chartOptions);
     }
     $result = '<?xml version="1.0" standalone="no"?>' . PHP_EOL;
-    $result .= $poloniexChart->render();
+    $result .= $neatChart->render();
 
     if ($format == 'png') {
       $im = new Imagick();
@@ -215,19 +236,18 @@ function renderChart(
     CacheManager::set($chartCacheKey, $result, $cacheTimeSeconds);
     $resultExpires = time() + $cacheTimeSeconds;
   } else {
-    $resultExpires = CacheManager::getInfo($chartCacheKey)[ 'expired_time' ];
+    $resultExpires = CacheManager::getInfo($chartCacheKey)['expired_time'];
     // TODO cache an object that has the data and a when-expired timestamp to avoid this cache-info lookup
-    $startTime = $resultExpires - $dataDuration;
   }
 
   header('Expires: '.gmdate(DateTime::RFC1123, $resultExpires));
   if ($format == 'png') {
     header('Content-Type: image/png');
-    header('Content-Disposition: inline; filename="Dash-chart-' . gmdate('Y-m-d\THis+0', $startTime) . '--' . gmdate('Y-m-d\THis+0') . '.png"');
+    header('Content-Disposition: inline; filename="Dash-chart-' . gmdate('Y-m-d\THis+0', $resultExpires) . '--' . gmdate('Y-m-d\THis+0') . '.png"');
     echo $result;
   } else if ($format == 'svg') {
     header('Content-type: image/svg+xml; charset=utf-8');
-    header('Content-Disposition: inline; filename="Dash-chart-' . gmdate('Y-m-d\THis+0', $startTime) . '--' . gmdate('Y-m-d\THis+0') . '.svg"');
+    header('Content-Disposition: inline; filename="Dash-chart-' . gmdate('Y-m-d\THis+0', $resultExpires) . '--' . gmdate('Y-m-d\THis+0') . '.svg"');
     $result = str_replace([
       '@lineColor',
       '@markerColor',
