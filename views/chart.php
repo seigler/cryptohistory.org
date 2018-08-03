@@ -116,7 +116,7 @@ function renderChart(
     /* day, hour, minute */
     '1y'=> [
       'resolution' => 'day',
-      'limit' => 365,
+      'limit' => 52,
       'aggregate' => 7,
       'cacheTimeSeconds' => 7 * 24 * 60 * 60
     ],
@@ -128,13 +128,13 @@ function renderChart(
     ],
     '7d'=> [
       'resolution' => 'hour',
-      'limit' => 7 * 24,
+      'limit' => 7 * 24 / 4,
       'aggregate' => 4,
-      'cacheTimeSeconds' => 4 * 24 * 60 * 60
+      'cacheTimeSeconds' => 4 * 60 * 60
     ],
     '24h' => [
       'resolution' => 'minute',
-      'limit' => 24 * 60,
+      'limit' => 24 * 60 / 15,
       'aggregate' => 15,
       'cacheTimeSeconds' => 15 * 60
     ]
@@ -181,8 +181,7 @@ function renderChart(
     $cryptocompareJson = CacheManager::get($dataCacheKey);
 
     if(is_null($cryptocompareJson)) {
-      $cryptocompareJson = getJson('https://min-api.cryptocompare.com/data/histo'.
-        "$resolution?fsym=$currencyA&tsym=$currencyB&limit=$limit&aggregate=$aggregate");
+      $cryptocompareJson = getJson("https://min-api.cryptocompare.com/data/histo$resolution?fsym=$currencyA&tsym=$currencyB&limit=$limit&aggregate=$aggregate");
 
       if ($cryptocompareJson->Response == 'Error') {
         CacheManager::set($dataCacheKey, $cryptocompareJson, 60);
